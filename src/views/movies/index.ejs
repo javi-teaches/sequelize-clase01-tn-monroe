@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Listado de películas</title>
-</head>
-<body>
+<%- include('../partials/head')  %> 
 	<h1>Listado de películas</h1>
 	<ul>
-		<% for (const unaPelicula of peliculas) { %>
+		<% for (const oneMovie of movies) { %>
 		<li> 
-			<%= unaPelicula.title %> 
-			<a href="/movies/detail/<%= unaPelicula.id %>">ver más</a> 
+			<b>Título:</b> <%= oneMovie.title %><br>
+			<a href="/movies/detail/<%= oneMovie.id %>">ver más</a> 
+			<br><br>
 		</li>	
 		<% } %>
 	</ul>
-</body>
-</html>
+<%- include('../partials/footer')  %>

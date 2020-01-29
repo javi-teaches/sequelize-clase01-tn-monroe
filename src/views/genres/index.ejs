@@ -1,0 +1,17 @@
+<%- include('../partials/head')  %>
+<h1>Listado de Géneros</h1>
+<ul>
+	<% for (const oneGenre of genres) { %>
+	<li>
+		<b>Nombre:</b> <%= oneGenre.name %><br>
+		<% if (oneGenre.movies.length > 0) { %>
+			<h5>Películas:</h5>
+			<% oneGenre.movies.forEach(oneMovie => { %>
+			<i><a href="/movies/detail/<%= oneMovie.id %>"> <%= oneMovie.title %> </a></i> <br>
+			<% }) %>
+			<br>
+		<% } %>
+	</li>
+	<% } %>
+</ul>
+<%- include('../partials/footer')  %>

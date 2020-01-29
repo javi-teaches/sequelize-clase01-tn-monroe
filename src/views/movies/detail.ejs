@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title><%= pelicula.title %></title>
-</head>
-<body>
-	<h1><%= pelicula.title %></h1>
-	<p>Rating: <%= pelicula.rating %></p>
-	<p>Awards: <%= pelicula.awards %></p>
-	<p>Genre: <%= pelicula.genre_id %></p>
-</body>
-</html>
+<%- include('../partials/head')  %>
+	<h1><%= movie.title %></h1>
+	<p><b>Rating:</b> <%= movie.rating %></p>
+	<p><b>Awards:</b> <%= movie.awards %></p>
+	<p><b>Release date:</b> <%= movie.release_date %></p>
+	<p><b>Genre:</b> <%= movie.genre ? movie.genre.name : 'No tiene género asociado' %></p>
+	<p><b>Length:</b> <%= movie.length %></p>
+	<% if (movie.actors.length > 0) { %>
+		<h4>Actores:</h4>
+		<ol>
+			<% movie.actors.forEach(oneActor => { %>
+			<li><%= oneActor.first_name + ' ' + oneActor.last_name %> </li>
+			<% }) %>
+		</ol>
+	<% } %>
+	
+	<a href="/movies">volver</a>
+	<a href="/movies/edit/<%= movie.id %>">EDITAR</a>
+	<hr>
+	<h5>¿Seguro que querés borrar esta película?</h5>
+	<form action="/movies/delete/<%= movie.id %>?_method=DELETE" method="POST">
+		<button type="submit">Borrar</button>
+	</form>
+	
+<%- include('../partials/footer')  %>

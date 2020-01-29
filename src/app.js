@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const methodOverride = require('method-override');
 
 const app = express();
 
@@ -16,16 +17,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(methodOverride('_method'));
 
 // Routes
 var indexRouter = require('./routes/indexRoutes');
 var usersRouter = require('./routes/usersRoutes');
 const moviesRoutes = require('./routes/moviesRoutes');
+const genresRoutes = require('./routes/genresRoutes');
 
 // Route Middleware
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/movies', moviesRoutes);
+app.use('/genres', genresRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

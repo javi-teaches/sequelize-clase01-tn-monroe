@@ -1,0 +1,50 @@
+<%- include('../partials/head')  %>
+<h1>Editando la película: <%= movie.title %> </h1>
+<form action="/movies/edit/<%= movie.id %>?_method=PUT" method="POST">
+	<div>
+		<label>Title:</label><br>
+		<input type="text" name="title" value="<%= movie.title %>">
+		<br><br>
+	</div>
+	<div>
+		<label>Rating:</label><br>
+		<input type="text" name="rating" value="<%= movie.rating %>">
+		<br><br>
+	</div>
+	<div>
+		<label>Awards:</label><br>
+		<input type="text" name="awards" value="<%= movie.awards %>">
+		<br><br>
+	</div>
+	<div>
+		<label>Release date:</label><br>
+		<% 
+			let realReleaseDate = `${movie.release_date.getFullYear()}-${movie.release_date.getMonth()}-${movie.release_date.getDate()}`;
+		%> 
+		<i> <%= realReleaseDate %>  </i><br>
+		<input type="date" name="release_date" value="2020-01-20">
+		<br><br>
+	</div>
+	<div>
+		<label>Length:</label><br>
+		<input type="text" name="length" value="<%= movie.length %>">
+		<br><br>
+	</div>
+	<div>
+		<label>Genre:</label><br>
+		<select name="genre_id">
+			<option value="">Elegí un género</option>
+			<% genres.forEach(oneGenre => { %>
+			<option 
+				value="<%= oneGenre.id %>"
+				<%= movie.genre_id == oneGenre.id ? 'selected' : null %>
+			>
+				<%= oneGenre.name %>
+			</option>
+			<% }) %>
+		</select>
+		<br><br>
+	</div>
+	<button type="submit">Guardar</button>
+</form>
+<%- include('../partials/footer')  %>
